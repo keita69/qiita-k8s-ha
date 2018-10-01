@@ -1,0 +1,5 @@
+---
+- hosts: work
+  roles:
+    - { role: common, become: yes }
+    - { role: glusterfs_client, become: yes }

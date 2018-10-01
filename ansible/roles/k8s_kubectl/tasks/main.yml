@@ -1,0 +1,19 @@
+---
+# file: roles\k8s_kubectl\tasks\main.yml
+
+- name: Add kubernetes repository
+  yum_repository:
+    name: kubernetes
+    description: Kubernetes
+    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+    repo_gpgcheck: yes
+    gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+    gpgcheck: yes
+    enabled: yes
+#    exclude: kube*
+
+- name: install kubectl
+  yum:
+    name: kubectl
+    state: installed
+ 

@@ -1,0 +1,12 @@
+---
+# file: roles/common/tasks/main.yml
+
+- name: Generate /etc/hosts file
+  become: yes
+  copy:
+    src: ../files/hosts
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes

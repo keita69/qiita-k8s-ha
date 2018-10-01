@@ -1,0 +1,25 @@
+---
+# file: roles/glusterfs_server_post/tasks/main.yml
+# ref: https://ngyuki.hatenablog.com/entry/2015/08/26/013622
+
+- name: create gluster cluster
+  shell: "gluster peer probe {{ item }}"
+  with_items:
+    - k8s-node1
+    - k8s-node2
+  run_once: true
+  delegate_to: k8s-master1
+
+- name: create gluster volume
+  shell: "gluster volume create data replica 3 k8s-master1:/glfs/vols/data k8s-node1:/glfs/vols/data k8s-node2:/glfs/vols/data"
+  run_once: true
+  delegate_to: k8s-master1
+  register: is_volume_check
+  failed_when: is_volume_check.rc not in [0, 1]
+
+- name: start gluster volume
+  shell: "gluster volume start data"
+  run_once: true
+  delegate_to: k8s-master1
+  register: is_started_check
+  failed_when: is_started_check.rc not in [0, 1]

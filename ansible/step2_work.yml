@@ -1,0 +1,4 @@
+---
+- hosts: work
+  roles:
+    - { role: k8s_kubectl, become: yes }

@@ -1,0 +1,13 @@
+---
+# file: roles/glusterfs_client_post/tasks/main.yml
+# ref: https://ngyuki.hatenablog.com/entry/2015/08/26/013622
+
+- name: mount glusterfs data directory for gluster client
+  mount:
+    path: /glfs/data
+    src: k8s-master1:/data
+    fstype: glusterfs
+    state: mounted
+
+- name: change uid/gid for gluster client
+  shell: "sudo chown vagrant:vagrant /glfs/data"

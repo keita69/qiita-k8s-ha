@@ -1,0 +1,10 @@
+---
+# file: roles/glusterfs_clinet/tasks/main.yml
+# ref: https://ngyuki.hatenablog.com/entry/2015/08/26/013622
+
+- name: be sure glusterfs_clinet is installed
+  become: yes
+  yum:
+    name: glusterfs-fuse
+    state: installed
+  tags: glusterfs_client

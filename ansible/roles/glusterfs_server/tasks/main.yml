@@ -1,0 +1,31 @@
+---
+# file: roles/glusterfs_server/tasks/main.yml
+# ref: https://ngyuki.hatenablog.com/entry/2015/08/26/013622
+
+- name: install centos-release-gluster packages
+  yum: 
+    name: centos-release-gluster
+    state: installed
+
+- name: install glusterfs_server packages
+  yum: 
+    name: glusterfs-server
+    state: installed
+
+- name: start glusterfs service
+  service:
+    name: glusterd
+    state: started
+    enabled: yes
+
+- name: mount gluster storage
+  shell: |
+    gluster pool list
+    cat /var/lib/glusterd/glusterd.info
+    parted -s -a optimal /dev/sdb mklabel msdos -- mkpart primary xfs 1 -1
+    mkfs.xfs -i size=512 /dev/sdb1
+    mkdir -p /glfs/vols
+    echo /dev/sdb1 /glfs/vols xfs defaults 0 0 >> /etc/fstab
+    mount /glfs/vols
+    mkdir -p /glfs/vols/data
+    exit 0

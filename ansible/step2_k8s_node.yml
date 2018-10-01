@@ -1,0 +1,5 @@
+---
+- hosts: k8_nodes
+  roles:
+    - { role: k8s_kubelet_kubeadm, become: yes }
+    - { role: k8s_kubectl, become: yes }
