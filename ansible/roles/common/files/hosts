@@ -1,6 +1,7 @@
 # much the contents of inventory hosts file
-127.0.0.1       localhost localhost.localdomain localhost4 localhost4.localdomain4
+127.0.0.1      localhost localhost.localdomain localhost4 localhost4.localdomain4
 172.16.33.11   work
+172.16.33.12   haproxy
 172.16.33.21   k8s-master1
 172.16.33.31   k8s-node1
 172.16.33.32   k8s-node2

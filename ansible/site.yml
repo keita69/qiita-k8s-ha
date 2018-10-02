@@ -1,0 +1,16 @@
+---
+# file: site.yml
+
+# STEP1
+- import_playbook: step1_k8s_master.yml
+- import_playbook: step1_k8s_node.yml
+- import_playbook: step1_work.yml
+- import_playbook: step1_post.yml
+- import_playbook: step1_haproxy.yml
+
+# STEP2
+- import_playbook: step2_k8s_master.yml
+- import_playbook: step2_k8s_node.yml
+- import_playbook: step2_work.yml
+# - import_playbook: step2_post.yml
+

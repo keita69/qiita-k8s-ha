@@ -1,14 +1,23 @@
 #!/bin/bash
 
-# 'BEHIND_PROXY' is set to true if the environment is behind a proxy.
-BEHIND_PROXY=false
+# please set ${PROXY_USER}, if your environment is behind proxy. 
 
-if [ ${BEHIND_PROXY} ]; then
+if [ -n "${PROXY_USER}" ]; then
   # mod your proxy info
-  USER=XXXXXXXXXXXX
-  PW=XXXXXXXXXXXX
-  SV=XXXXXXXXXXXX.com
-  PORT=8080
+  USER=${PROXY_USER}
+  PW=${PROXY_PW}
+  SV=${PROXY_SERVER}
+  PORT=${PROXY_PORT}
+  
+  # environment for all user
+  sudo tee -a  /etc/profile << EOS
+http_proxy=http://${USER}:${PW}@${SV}:${PORT}/
+https_proxy=${http_proxy}
+no_proxy=localhost,192.168.*,127.0.*,172.16.*
+HTTP_PROXY=${http_proxy}
+HTTPS_PROXY=${https_proxy}
+NO_PROXY=${no_proxy}
+EOS
 
   # curl
   echo "proxy=http://${USER}:${PW}@${SV}:${PORT}" > ~/.curlrc

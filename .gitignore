@@ -2,4 +2,3 @@
 *.vdi
 .vagrant
 .vagrant.d
-vagrant/provision_proxy.sh

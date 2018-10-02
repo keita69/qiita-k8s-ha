@@ -1,0 +1,10 @@
+---
+# file: roles\haproxy\tasks\main.yml
+# ref: https://pario.no/2018/07/17/install-haproxy-1-8-on-centos-7/
+# ref: https://qiita.com/myaaaaa_chan/items/f5280fee19799d381a4b
+
+# TODO shuld install from HAProxy source code !
+- name: install HAProxy
+  yum:
+    name: haproxy
+    state: installed

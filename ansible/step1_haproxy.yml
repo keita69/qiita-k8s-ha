@@ -1,0 +1,5 @@
+---
+- hosts: haproxy
+  roles:
+    - { role: common, become: yes }
+    - { role: haproxy, become: yes }

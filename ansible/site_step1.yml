@@ -1,6 +1,0 @@
----
-# file: site.yml
-- import_playbook: step1_k8s_master.yml
-- import_playbook: step1_k8s_node.yml
-- import_playbook: step1_work.yml
-- import_playbook: step1_post.yml

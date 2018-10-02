@@ -2,3 +2,9 @@
 # file: roles\k8s_cgroup_driver\tasks\main.yml
 # https://kubernetes.io/docs/setup/independent/install-kubeadm/#configure-cgroup-driver-used-by-kubelet-on-master-node
 
+- name: restart kubelet service (systemctl daemon-reload & systemctl restart kubelet)
+  service:
+    name: kubelet
+    state: restart
+    enabled: yes
+    daemon_reload: yes

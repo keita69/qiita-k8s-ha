@@ -2,10 +2,23 @@
 # file: roles/common/tasks/main.yml
 
 - name: Generate /etc/hosts file
-  become: yes
   copy:
     src: ../files/hosts
     dest: /etc/hosts
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+
+- name: set timezone to Asia/Tokyo(timedatectl set-timezone Asia/Tokyo)
+  timezone:
+    name: Asia/Tokyo
+
+#TODO shuld change nameserver !
+- name: change /etc/resolv.conf (8.8.8.8)
+  copy:
+    src: ../files/resolv.conf
+    dest: /etc/resolv.conf
     owner: root
     group: root
     mode: 0644

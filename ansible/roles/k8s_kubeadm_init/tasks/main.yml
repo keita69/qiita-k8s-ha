@@ -1,0 +1,11 @@
+---
+# file: roles\k8s_kubeadm_init\tasks\main.yml
+
+- name: init kubeadm
+  shell: "kubeadm init" 
+  register: result
+- debug: 
+    msg: result.stdout
+
+- name: save kubeadm init output(kubeadm join --token <token> <master-ip>:<master-port> --discovery-token-ca-cert-hash sha256:<hash>)
+  shell: "echo {{ result.stdout }} | tail -1 > /glfs/data/kubeadm_init.out" 

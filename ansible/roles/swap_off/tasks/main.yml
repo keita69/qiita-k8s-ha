@@ -1,0 +1,8 @@
+---
+# file: roles\swap_off\tasks\main.yml
+
+- name: disable swap
+  shell: |
+    swapoff -a
+    sed -e "/^UUID=[a-z0-9-]* swap/s/^/# /" -i.bak /etc/fstab
+    cat /etc/fstab

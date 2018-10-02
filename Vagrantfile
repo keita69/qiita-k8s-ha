@@ -33,13 +33,25 @@ Vagrant.configure("2") do |config|
   end
 
   #-------------------------------------------------------------------------------
+  # haproxy server
+  #-------------------------------------------------------------------------------
+  config.vm.define "haproxy" do |hap|
+    hap.vm.provider "virtualbox" do |vb|
+      vb.gui = false  
+      vb.memory = "512"
+    end
+    hap.vm.hostname = "haproxy"
+    hap.vm.network "private_network", ip: "172.16.33.12"
+  end
+
+  #-------------------------------------------------------------------------------
   # master server
   #-------------------------------------------------------------------------------
   (1..1).each do |i|
     config.vm.define "k8s-master#{i}" do |master|
       master.vm.provider "virtualbox" do |vb|
         vb.gui = false
-        vb.memory = "512"
+        vb.memory = "2048"
 
         # add strage
         file_to_disk = "./vagrant/glusterfs_mst#{i}.vdi"
@@ -60,7 +72,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "k8s-node#{i}" do |node|
       node.vm.provider "virtualbox" do |vb|
         vb.gui = false
-        vb.memory = "512"
+        vb.memory = "2048"
 
         # add strage
         file_to_disk = "./vagrant/glusterfs_node#{i}.vdi"

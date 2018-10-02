@@ -2,4 +2,5 @@
 - hosts: k8_masters
   roles:
     - { role: common, become: yes }
+    - { role: swap_off, become: yes }
     - { role: glusterfs_server, become: yes }
