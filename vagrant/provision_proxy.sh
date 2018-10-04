@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 'BEHIND_PROXY' is set to true if the environment is behind a proxy.
-BEHIND_PROXY=true
+BEHIND_PROXY=false
 
 if [ ${BEHIND_PROXY} ]; then
   # mod your proxy info
