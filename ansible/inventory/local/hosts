@@ -1,7 +1,7 @@
 [work]
 172.16.33.11
 
-[haproxy]
+[kong]
 172.16.33.12
 
 [k8_masters]

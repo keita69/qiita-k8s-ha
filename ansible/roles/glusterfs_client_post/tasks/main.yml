@@ -10,4 +10,4 @@
     state: mounted
 
 - name: change uid/gid for gluster client
-  shell: "sudo chown vagrant:vagrant /glfs/data"
+  shell: "chown vagrant:vagrant /glfs/data"

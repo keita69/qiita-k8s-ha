@@ -34,7 +34,7 @@ Vagrantfile … Vagrant定義ファイル
 ## インフラ(vagrant)でやっていること
 * サーバの構築
   * work
-  * HAProxy
+  * kong
   * k8s master(s)
   * k8s node(s)
 * ネットワークの構築

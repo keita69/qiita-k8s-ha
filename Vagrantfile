@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
   #-------------------------------------------------------------------------------
   config.vm.define "work" do |wk|
     wk.vm.provider "virtualbox" do |vb|
-      vb.gui = false  
+      vb.gui = true  
       vb.memory = "512"
 
       # add strage
@@ -33,14 +33,14 @@ Vagrant.configure("2") do |config|
   end
 
   #-------------------------------------------------------------------------------
-  # haproxy server
+  # kong server(kong + postgressSQL10)
   #-------------------------------------------------------------------------------
-  config.vm.define "haproxy" do |hap|
+  config.vm.define "kong" do |hap|
     hap.vm.provider "virtualbox" do |vb|
-      vb.gui = false  
-      vb.memory = "512"
+      vb.gui = true  
+      vb.memory = "2048"
     end
-    hap.vm.hostname = "haproxy"
+    hap.vm.hostname = "kong"
     hap.vm.network "private_network", ip: "172.16.33.12"
   end
 
@@ -50,7 +50,7 @@ Vagrant.configure("2") do |config|
   (1..1).each do |i|
     config.vm.define "k8s-master#{i}" do |master|
       master.vm.provider "virtualbox" do |vb|
-        vb.gui = false
+        vb.gui = true
         vb.memory = "2048"
 
         # add strage
@@ -71,7 +71,7 @@ Vagrant.configure("2") do |config|
   (1..2).each do |i|
     config.vm.define "k8s-node#{i}" do |node|
       node.vm.provider "virtualbox" do |vb|
-        vb.gui = false
+        vb.gui = true
         vb.memory = "2048"
 
         # add strage

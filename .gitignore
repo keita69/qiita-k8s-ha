@@ -2,3 +2,6 @@
 *.vdi
 .vagrant
 .vagrant.d
+*.pdf
+vagrant/provision_proxy.sh
+.vscode/

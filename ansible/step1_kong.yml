@@ -1,0 +1,5 @@
+---
+- hosts: kong
+  roles:
+    - { role: common, become: yes }
+    - { role: kong, become: yes }

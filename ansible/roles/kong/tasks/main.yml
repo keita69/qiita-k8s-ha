@@ -1,0 +1,17 @@
+---
+# file: roles\kong\tasks\main.yml
+# ref: https://docs.konghq.com/install/centos/#packages
+
+- name: install epel-release
+  yum:
+    name: epel-release
+    state: installed
+
+- name: install kong
+  yum:
+    name: https://kong.bintray.com/kong-community-edition-rpm/centos/7/kong-community-edition-0.14.1.el7.noarch.rpm
+    state: installed
+    disable_gpg_check: no
+
+# TODO install postgresSQL10
+

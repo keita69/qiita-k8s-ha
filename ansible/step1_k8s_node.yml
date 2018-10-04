@@ -4,3 +4,4 @@
     - { role: common, become: yes }
     - { role: swap_off, become: yes }
     - { role: glusterfs_server, become: yes }
+    - { role: docker-ce, become: yes }
