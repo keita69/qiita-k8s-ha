@@ -1,11 +1,17 @@
 ---
 # file: roles\k8s_kubeadm_init\tasks\main.yml
+# ref: https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#pod-network
 
 - name: init kubeadm
-  shell: "kubeadm init" 
-  register: result
-- debug: 
-    msg: result.stdout
+
+- name: init kubeadm
+ shell: "kubeadm init"
+ register: result
+- debug:
+   msg: "{{ result.stdout_lines}}"
 
 - name: save kubeadm init output(kubeadm join --token <token> <master-ip>:<master-port> --discovery-token-ca-cert-hash sha256:<hash>)
-  shell: "echo {{ result.stdout }} | tail -1 > /glfs/data/kubeadm_init.out" 
+ shell: |
+   tee /glfs/data/kubeadm_init.out << EOS
+   {{ result.stdout_lines }}
+   EOS
