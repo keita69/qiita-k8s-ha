@@ -5,3 +5,4 @@
 *.pdf
 vagrant/provision_proxy.sh
 .vscode/
+git
