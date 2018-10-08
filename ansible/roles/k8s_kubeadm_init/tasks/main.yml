@@ -3,13 +3,23 @@
 # ref: https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#pod-network
 
 - name: init kubeadm
- shell: "kubeadm init"
- register: result
+  shell: "kubeadm init --kubernetes-version 1.12.0 --apiserver-advertise-address={{ ansible_eth1.ipv4.address }} --pod-network-cidr=10.244.0.0/16"
+  register: result
 - debug:
-   msg: "{{ result.stdout_lines}}"
+    msg: "{{ result.stdout_lines}}"
 
 - name: save kubeadm init output(kubeadm join --token <token> <master-ip>:<master-port> --discovery-token-ca-cert-hash sha256:<hash>)
- shell: |
-   tee /glfs/data/kubeadm_init.out << EOS
-   {{ result.stdout_lines }}
-   EOS
+  shell: |
+    tee /glfs/data/kubeadm_init.out << EOS
+    {{ result.stdout_lines }}
+    EOS
+
+- name: installing a pod network add-on (flannel)
+  shell: |
+    mkdir -p $HOME/.kube
+    cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    chown $(id -u):$(id -g) $HOME/.kube/config
+    export KUBECONFIG=/etc/kubernetes/admin.conf
+
+- name: installing a pod network add-on (flannel)
+  shell: "kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.10.0/Documentation/kube-flannel.yml"
